@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data>
+
+    <record id="view_report_ctrl_rcp_tree" model="ir.ui.view">
+        <field name="name">report.ctrl.rcp.tree</field>
+        <field name="model">report.ctrl.rcp</field>
+        <field name="type">tree</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="product_id" />
+                <field name="partner_id" />
+                <field name="purchase_order" />
+                <field name="picking" />
+                <field name="tracking" />
+                <field name="warehouse_id" />
+                <field name="minimum_planned_date" />
+                <field name="receipt_state" />
+                <field name="ctrl_liberatoire" />
+                <button name="%(eurogerm_profile.action_wizard_lot_quality_problem_view)d" string="Receipt Product" icon="gtk-ok" type="action" />
+                <field name="purchase_lot" />
+                <field name="purchase_eg" />
+                <field name="ctrl_state" />
+                <field name="lot_state" />
+                <field name="comment" />
+            </tree>
+        </field>
+    </record>
+
+
+    <record id="view_report_ctrl_rcp_search" model="ir.ui.view">
+        <field name="name">report.ctrl.rcp.search</field>
+        <field name="model">report.ctrl.rcp</field>
+        <field name="type">search</field>
+        <field name="arch" type="xml">
+            <search>
+              <group col="10" colspan="12">
+                    <field name="product_id" />
+                    <field name="partner_id" />
+                    <field name="purchase_order" />
+                    <field name="picking" />
+                    <field name="tracking" />
+                    <field name="warehouse_id" />
+                    <field name="ctrl_liberatoire" />
+                    <field name="purchase_lot" />
+                    <field name="purchase_eg" />
+                    <field name="ctrl_state" />
+                    <field name="lot_state" />
+
+                    <filter icon="terp-go-week"
+                            string="    7 Days    "
+                            separator="1"
+                            domain="[('minimum_planned_date','&lt;=', time.strftime('%%Y-%%m-%%d')), ('minimum_planned_date','&gt;',(datetime.date.today()-datetime.timedelta(days=7)).strftime('%%Y-%%m-%%d'))]"
+                            help=""/>
+                </group>
+             </search>
+        </field>
+    </record>
+
+    
+    <record id="action_view_report_ctrl_rcp" model="ir.actions.act_window">
+        <field name="name">Ctrl Rcp</field>
+        <field name="res_model">report.ctrl.rcp</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree</field>
+        <field name="context">{}</field>
+    </record>
+
+
+    <!-- Entrepôt / Gestion des réceptions -->
+    <menuitem action="action_view_report_ctrl_rcp"
+        name="Ctrl Rcp"
+        id="menu_view_report_ctrl_rcp1"
+        parent="eurogerm_profile.menu_eg_stock_incoming_mgmt" sequence="90"/>
+
+    <!-- Qualité / Sécurité alimentaire /  Gestion des lots -->
+    <menuitem action="action_view_report_ctrl_rcp"
+        name="Ctrl Rcp"
+        id="menu_view_report_ctrl_rcp2"
+        parent="eurogerm_profile.eg_qs_tracability_lot_management" sequence="90"/>
+
+    <!-- Service communication /  Gestion des lots -->
+    <menuitem action="action_view_report_ctrl_rcp"
+        name="Ctrl Rcp"
+        id="menu_view_report_ctrl_rcp3"
+        parent="eurogerm_profile.eg_communication_tracability_lot_management" sequence="90"/>
+
+    <!-- Laboratoire / Contrôle / Gestion des lots -->
+    <menuitem action="action_view_report_ctrl_rcp"
+        name="Ctrl Rcp"
+        id="menu_view_report_ctrl_rcp4"
+        parent="eurogerm_profile.eg_labo_tracability_lot_management" sequence="90"/>
+
+
+</data>
+</openerp>
